@@ -18,6 +18,7 @@ public class UserDto {
     private Role auth;
     private int balance;
     private int count;
+    private String address;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
@@ -30,6 +31,7 @@ public class UserDto {
                 .auth(auth)
                 .balance(balance)
                 .count(count)
+                .address(address)
                 .build();
     }
 
@@ -40,7 +42,8 @@ public class UserDto {
             String password,
             Role auth,
             int balance,
-            int count
+            int count,
+            String address
     ) {
         this.id = id;
         this.email = email;
@@ -48,5 +51,6 @@ public class UserDto {
         this.auth = auth;
         this.balance = balance;
         this.count = count;
+        this.address = address;
     }
 }

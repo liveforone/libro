@@ -38,6 +38,9 @@ public class Users {
     @Column(columnDefinition = "integer default 0")
     private int count;  //주문 건수
 
+    @Column
+    private String address;
+
     @Builder
     public Users(
             Long id,
@@ -45,7 +48,8 @@ public class Users {
             String password,
             Role auth,
             int balance,
-            int count
+            int count,
+            String address
     ) {
         this.id = id;
         this.email = email;
@@ -53,5 +57,6 @@ public class Users {
         this.auth = auth;
         this.balance = balance;
         this.count = count;
+        this.address = address;
     }
 }

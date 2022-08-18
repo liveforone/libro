@@ -77,6 +77,7 @@ public class UserService implements UserDetailsService {
                 .auth(Role.SELLER)
                 .balance(user.getBalance())
                 .count(user.getCount())
+                .address(user.getAddress())
                 .build();
         userRepository.save(userDto.toEntity());
     }

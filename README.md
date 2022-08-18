@@ -27,7 +27,7 @@
 
 ## 엔티티설계
 ### user
-* id, email, password, auth, balance(자산), count(주문건수)
+* id, email, password, auth, balance(자산), count(주문건수), address
 ### item
 * id, title, author(사용자 입력받아야함), writer(상품등록자), price, remaining(수량), category, year, good
 ### order
