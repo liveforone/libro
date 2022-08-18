@@ -168,4 +168,33 @@ public class ItemController {
         log.info("Good update!!");
         return "redirect:" + url;
     }
+
+    //== 상품 수정 페이지 ==//
+    @GetMapping("/user/item/edit/{title}")
+    public String editPage(
+            @PathVariable("title") String title,
+            Model model
+    ) {
+        Item item = itemService.getItem(title);
+        model.addAttribute("item", item);
+        return "/item/itemEdit";
+    }
+
+    //== 상품 수정 ==//
+    @PostMapping("/user/item/edit/{title}")
+    public String editItem(
+            @PathVariable("title") String title,
+            @RequestParam MultipartFile uploadFile,
+            @RequestParam(value = "saveFileName", required = false) String saveFileName,
+            ItemDto itemDto
+    ) throws IllegalStateException, IOException {
+        String url = "/user/item/" + title;
+        if (!uploadFile.isEmpty()) {  //파일을 바꿔서 수정
+            itemService.updateItemWithFile(uploadFile, itemDto);
+        } else {  //기존 파일 유지하며 수정
+            itemService.updateItemWithSaveFileName(saveFileName, itemDto);
+        }
+        log.info("Edit Success!!");
+        return "redirect:" + url;
+    }
 }

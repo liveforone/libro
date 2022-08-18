@@ -24,7 +24,7 @@
 ### user
 * id, email, password, auth, balance(자산), count(주문건수)
 ### item
-* id, title, author(사용자 입력받아야함), price, remaining(수량), category, year, good
+* id, title, author(사용자 입력받아야함), writer(상품등록자), price, remaining(수량), category, year, good
 ### order
 * id, itemTitle, member, status(Enum - ORDER, CANCEL), date(LocalDate 로컬데이트타임 아님)
 
@@ -36,13 +36,13 @@
 /user/item/{title}
 /user/item/category/{category}
 /user/item/good/{title}
+/user/item/edit/{title}
 
-게시글 수정
 리뷰게시판
 구매 버튼 -> 
 구매버튼 클릭시 구자산 정보가져와서 가격이랑 비교해야함
 
-/user/item/edit/{title}
+
 
 /user/comment/{title}
 /user/comment/post/{title}

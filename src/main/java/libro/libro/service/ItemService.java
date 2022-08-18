@@ -61,4 +61,21 @@ public class ItemService {
     public void updateGood(String title) {
         itemRepository.updateGood(title);
     }
+
+    //== 기존파일 변경하며 수정 ==//
+    @Transactional
+    public void updateItemWithFile(MultipartFile uploadFile, ItemDto itemDto) throws IOException{
+        UUID uuid = UUID.randomUUID();
+        String saveFileName = uuid + "_" + uploadFile.getOriginalFilename();
+        itemDto.setSaveFileName(saveFileName);
+        uploadFile.transferTo(new File(saveFileName));
+        itemRepository.save(itemDto.toEntity());
+    }
+
+    //== 기존파일 유지하며 수정 ==//
+    @Transactional
+    public void updateItemWithSaveFileName(String saveFileName, ItemDto itemDto) {
+        itemDto.setSaveFileName(saveFileName);
+        itemRepository.save(itemDto.toEntity());
+    }
 }
