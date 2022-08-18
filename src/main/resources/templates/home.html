@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>홈</title>
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <a class="navbar-brand" th:href="@{/}">Libro</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/user/login}">로그인</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/user/signup}">회원가입</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}">어드민</a>
+            </li>
+            <li class="nav-item" sec:authorize="isAuthenticated()" th:if="${not#authorization.expression('hasRole(''SELLER'')')}">
+                <a class="nav-link" th:href="@{/user/seller}">판매자등록</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{'/user/itemHome'}">상품홈</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{'/user/warn'}">이용수칙</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<br>
+<br>
+<div class="container-xxl bd-gutter">
+    <div class="col-md-8 mx-auto text-center">
+        <h1 class="mb-3 fw-semibold">Libro 온라인 서점</h1><br>
+        <p class="lead mb-4">
+            Libro는 책이란 뜻을 가집니다.
+            책을 사랑하는 모두가 모이는 곳, Libro
+        </p>
+    </div>
+</div>
+</body>
+</html>

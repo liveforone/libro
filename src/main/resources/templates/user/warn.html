@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <title>이용수칙</title>
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<header th:insert="common/header.html"></header>
+<h1 style="text-align: center;">이용수칙 안내</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-auto mr-auto"></div>
+        <div class="col-auto align-items-center">
+            <p>
+                1. 상품등록 주의사항 : 상품등록시 사진은 <u>한 장</u>만 등록 가능합니다.
+                <br><u>여러장 등록시 가장 마지막 사진이 등록됩니다.</u>
+            </p>
+            <p>
+                2. 리뷰 주의사항 : 리뷰에 욕설, 비방은 절대 달지 않도록 합니다. 이의제기는 가능합니다.
+            </p>
+            <p>
+                3. 상품 삭제 주의 사항 : 상품은 <u>수정</u>만 가능합니다. 삭제는 <u>불가능</u>합니다.
+            </p>
+        </div>
+    </div>
+</div>
+<div class="container row" style="float: none; margin:100 auto;">
+    <div class="col-md-3" style="float: none; margin:0 auto;">
+        <a class="btn btn-secondary" th:href="@{/user/itemHome}" role="button">상품홈으로</a>
+    </div>
+</div>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../css/bootstrap.min.css"></script>
+</body>
+</html>

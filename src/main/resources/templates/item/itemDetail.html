@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <title th:text="|상품 ${itemTitle}|"></title>
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<header th:insert="common/header.html"></header>
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title" th:text="${item.title}"></h2>
+            <span class="card-text" th:text="|저자 : ${item.author}|"></span>
+            <span class="card-text">&nbsp;&#124;&nbsp;</span>
+            <span class="card-text" th:text="|카테고리 : ${item.category}|"></span>
+            <span class="card-text">&nbsp;&#124;&nbsp;</span>
+            <span class="card-text" th:text="|출판년도 : ${item.year}|"></span><br>
+            <h4 class="card-text" th:text="|가격 : ${item.price}|"></h4>
+            <h4 class="card-text" th:text="|수량 : ${item.remaining}|"></h4><br>
+            <form th:if="${item.remaining != 0}" id="order-form" th:action="@{'/user/item/order/' + ${item.title}}" method="post">
+                <button id="order-btn" type="submit" class="btn btn-primary">상품 구매</button>
+            </form>
+            <button th:if="${item.remaining == 0}" id="zero-btn" type="button" class="btn btn-warning">품절</button>
+        </div>
+        <div class="card-img" th:if="${item.saveFileName != null}">
+            <img th:src="@{'/user/item/image/' + ${item.saveFileName}}" border="0" width="300" height="300" alt="No Image"/>
+        </div>
+    </div>
+    <br>
+    <form id="good-form" th:action="@{'/user/item/good/' + ${item.title}}" method="post">
+        <button id="good-btn" type="submit" class="btn btn-primary">좋아요</button>
+        <span th:text="${item.good}"></span>
+    </form>
+    <br>
+    <div>
+        <a class="btn btn-success" th:href="@{'/user/comment/' + ${item.title}}" role="button">리뷰&Q</a>
+    </div>
+    <div class="row mt-3">
+        <div class="col-auto mr-auto"></div>
+        <div class="col-auto">
+            <a class="btn btn-secondary" th:href="@{/user/itemHome}" role="button">나가기</a>
+        </div>
+        <div class="col-auto" th:if="${item.writer == member}">
+            <a class="btn btn-info" th:href="@{'/user/item/edit/' + ${item.title}}" role="button">수정</a>
+        </div>
+    </div>
+</div>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../css/bootstrap.min.css"></script>
+</body>
+</html>

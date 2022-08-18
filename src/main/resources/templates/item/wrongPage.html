@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <title>상품등록 불가능</title>
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<header th:insert="common/header.html"></header>
+<h1 style="text-align: center;">판매자님, 사진 없이는 상품등록이 불가능합니다.</h1>
+<h3 style="text-align: center;">현재 판매자님은 사진을 삽입하지않았기에 해당 페이지로 리다이렉트 되셨습니다.</h3>
+<h4 style="text-align: center;">사진 삽입을 반드시 해주세요.</h4>
+<div class="container">
+    <div class="row">
+        <div class="col-auto mr-auto"></div>
+        <div class="col-auto align-items-center">
+            <p>
+                1. 상품등록 주의사항 : 상품등록시 사진은 <u>한 장</u>만 등록 가능합니다.
+                <br><u>여러장 등록시 가장 마지막 사진이 등록됩니다.</u>
+            </p>
+            <p>
+                2. 사진없이 등록할 경우 해당 페이지로 이동됩니다. 사진을 반드시 등록해주세요.
+            </p>
+        </div>
+    </div>
+</div>
+<div class="container row" style="float: none; margin:100 auto;">
+    <div class="col-md-3" style="float: none; margin:0 auto;">
+        <a class="btn btn-secondary" th:href="@{/user/itemHome}" role="button">상품홈으로</a>
+    </div>
+</div>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../css/bootstrap.min.css"></script>
+</body>
+</html>

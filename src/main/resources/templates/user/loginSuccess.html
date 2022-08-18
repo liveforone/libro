@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>로그인 성공</title>
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="py-5 text-center bg-secondary text-white">
+    <h1>로그인 성공!!</h1>
+</div><hr>
+
+<div class="py-5 text-center bg-info text-white">
+    <h1><span class="badge badge-secondary" sec:authentication="name"></span>님 환영합니다~</h1><br><br>
+</div><hr>
+
+<a class="link-danger" th:href="@{'/'}">메인으로 이동해주세요</a>
+</body>
+</html>

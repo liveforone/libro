@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <title>itemList</title>
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <a class="navbar-brand" th:href="@{/}">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/user/item/category/여행}">여행</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/user/item/category/경제}">경제</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/user/item/category/IT}">IT</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/user/item/category/음악}">음악</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/user/item/category/종교}">종교</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/user/item/category/유아}">유아</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/user/item/category/역사}">역사</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/user/item/category/예술}">예술</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/user/item/category/요리}">요리</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/user/item/category/자기계발}">자기계발</a>
+        </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0" th:action="@{/user/itemHome/search}" method="GET">
+        <input name="keyword" class="form-control mr-sm-2" type="search" placeholder="검색" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+</nav>
+<div class="container">
+    <table class="table">
+        <thead class="thead-light">
+        <tr class="text-center">
+            <th scope="col">#</th>
+            <th scope="col">제목</th>
+            <th scope="col">작가</th>
+            <th scope="col">카테고리</th>
+            <th scope="col">발행년도</th>
+            <th scope="col">좋아요</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="text-center" th:each="post : ${itemList}">
+            <th scope="row">
+                <span th:text="${post.id}"></span>
+            </th>
+            <td>
+                <a th:href="@{'/user/item/' + ${post.title}}">
+                    <span th:text="${post.title}"></span>
+                </a>
+            </td>
+            <td>
+                <span th:text="${post.author}"></span>
+            </td>
+            <td>
+                <a th:href="@{'/user/item/category/' + ${post.category}}">
+                    <span th:text="${post.category}"></span>
+                </a>
+            </td>
+            <td>
+                <span th:text="${post.year}"></span>
+            </td>
+            <td>
+                <span th:text="${post.good}"></span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
+        <a th:if="${page != nowPage}" th:href="@{/user/itemHome(page = ${page - 1})}" th:text="${page}"></a>
+        <strong th:if="${page == nowPage}" th:text="${page}" style="color : red"></strong>
+    </th:block>
+    <div class="row">
+        <div class="col-auto mr-auto"></div>
+        <div class="col-auto">
+            <a class="btn btn-secondary" th:href="@{/}" role="button">홈으로</a>
+        </div>
+        <div class="col-auto" sec:authorize="hasRole('ROLE_SELLER')">
+            <a class="btn btn-primary" th:href="@{/user/item/post}" role="button">상품등록</a>
+        </div>
+    </div>
+</div>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../css/bootstrap.min.css"></script>
+</body>
+</html>
