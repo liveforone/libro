@@ -32,6 +32,8 @@
 * id, title, author(사용자 입력받아야함), writer(상품등록자), price, remaining(수량), category, year, good
 ### order
 * id, itemTitle, member, status(Enum - ORDER, CANCEL), date(LocalDate 로컬데이트타임 아님)
+### comment
+* id, user, content, itemNum, createdDate
 
 ## url 설계
 <pre>
@@ -42,14 +44,12 @@
 /user/item/category/{category}
 /user/item/good/{title}
 /user/item/edit/{title}
-
-리뷰게시판
-구매 버튼 -> 
-구매버튼 클릭시 구자산 정보가져와서 가격이랑 비교해야함
-
 /user/comment/{title}
 /user/comment/post/{title}
 /user/comment/delete/{title}
+
+구매 버튼 -> 
+구매버튼 클릭시 구자산 정보가져와서 가격이랑 비교해야함
 
 /user/myPage/{email}
 /user/myPage/orderList/{email}
