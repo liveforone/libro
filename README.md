@@ -60,6 +60,8 @@
 /user/item/denial/{title} - 잔액 부족시 구매 거부
 
 /user/item/cancel/{title} - orderList안에서 진행함. 타이틀은 itemTitle임.
+
+주문다 만들고 주문 리스트에서 주문취소 잘 뜨는지 안뜨는지 확인하고 취소 로직까지 다만들기
 </pre>
 
 ## sql signed/unsigned??
