@@ -16,8 +16,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,5 +80,23 @@ public class UserService implements UserDetailsService {
                 .address(user.getAddress())
                 .build();
         userRepository.save(userDto.toEntity());
+    }
+
+    //== 유저 정보 가져오기 ==//
+    @Transactional(readOnly = true)
+    public Users getUser(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    //== 유저 주소 등록 ==//
+    @Transactional
+    public void regiAddress(String email, String address) {
+        userRepository.updateAddress(address, email);
+    }
+
+    //== 게좌 잔액 업데이트 ==//
+    @Transactional
+    public void updateBalance(int balance, String email) {
+        userRepository.updateBalance(balance, email);
     }
 }

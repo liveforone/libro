@@ -50,17 +50,20 @@ public class ItemController {
     @GetMapping("/user/itemHome")
     public String itemHome(
             @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
-            Model model
+            Model model,
+            Principal principal
     ) {
         Page<Item> itemList = itemService.getItemList(pageable);
         int nowPage = getNowPage(itemList);
         int startPage = getStartPage(nowPage);
         int endPage = getEndPage(nowPage, itemList);
+        String me = principal.getName();  //myPage 에서 사용
 
         model.addAttribute("itemList", itemList);
         model.addAttribute("nowPage", nowPage);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
+        model.addAttribute("me", me);
         return "/item/itemHome";
     }
 

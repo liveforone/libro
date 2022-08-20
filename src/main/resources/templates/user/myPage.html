@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <title>마이 페이지</title>
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <a class="navbar-brand" th:href="@{/user/itemHome}">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <h3><span th:text="|${user.email}님의 페이지|" class="badge badge-secondary"></span></h3>
+    </div>
+</nav>
+
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title" th:text="|${user.email}님 환영합니다!|"></h2>
+            <span class="card-text" th:if="${user.count <= 10}" th:text="|등급 : 브론즈|"></span>
+            <span class="card-text" th:if="${user.count >= 11}" th:text="|등급 : 실버|"></span>
+            <span class="card-text" th:if="${user.count >= 21}" th:text="|등급 : 골드|"></span>
+            <span class="card-text" th:if="${user.count >= 31}" th:text="|등급 : 플래티넘|"></span><br>
+            <form class="form-inline my-2 my-lg-0" th:if="${user.address == null}" th:action="@{'/user/myPage/address/' +${user.email}}" method="POST">
+                <span class="card-text">주소가 없습니다. 등록해주세요.</span>
+                <input name="address" class="form-control mr-sm-2" type="text">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">주소등록</button>
+            </form>
+            <span class="card-text" th:if="${user.address != null}" th:text="|주소 : ${user.address}|"></span><br>
+            <span class="card-text" th:text="|잔액 : ${user.balance}|"></span><br>
+            <form class="form-inline my-2 my-lg-0" th:action="@{'/user/myPage/deposit/' +${user.email}}" method="POST">
+                <span class="card-text">충전할 금액을 입력하세요</span>
+                <input name="deposit" class="form-control mr-sm-2" type="number">
+                <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">잔액충전</button>
+            </form><br>
+            <a th:href="@{'/user/myPage/orderList/' + ${user.email}}" class="btn btn-warning">주문리스트보기</a>
+        </div>
+    </div>
+    <div class="col-auto">
+        <a class="btn btn-secondary" th:href="@{/user/itemHome}" role="button">나가기</a>
+    </div>
+</div>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../css/bootstrap.min.css"></script>
+</body>
+</html>

@@ -30,7 +30,7 @@
 * id, email, password, auth, balance(자산), count(주문건수), address
 ### item
 * id, title, author(사용자 입력받아야함), writer(상품등록자), price, remaining(수량), category, year, good
-### order
+### orders
 * id, itemTitle, member, status(Enum - ORDER, CANCEL), date(LocalDate 로컬데이트타임 아님)
 ### comment
 * id, user, content, itemNum, createdDate
@@ -47,16 +47,17 @@
 /user/comment/{title}
 /user/comment/post/{title}
 /user/comment/delete/{title}
+/user/myPage/{email}
+/user/myPage/address/{email}
+/user/myPage/deposit/{email}
+/user/myPage/ordersList/{email}
 
 구매 버튼 -> 
 구매버튼 클릭시 구자산 정보가져와서 가격이랑 비교해야함
 
-/user/myPage/{email}
-/user/myPage/orderList/{email}
-/user/myPage/deposit/{email}
 
-/user/item/order/{title}
-/user/item/denial/{title}
+/user/item/orders/{title}
+/user/item/denial/{title} - 잔액 부족시 구매 거부
 
 /user/item/cancel/{title} - orderList안에서 진행함. 타이틀은 itemTitle임.
 </pre>

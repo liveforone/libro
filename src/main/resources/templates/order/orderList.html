@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <title>ordersList</title>
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <a class="navbar-brand" th:href="@{/user/itemHome}">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <h3><span th:text="|${email}님의 주문리스트|" class="badge badge-secondary"></span></h3>
+    </div>
+</nav>
+<div class="container">
+    <table class="table">
+        <thead class="thead-light">
+        <tr class="text-center">
+            <th scope="col">상품</th>
+            <th scope="col">상태</th>
+            <th scope="col">주문날짜</th>
+            <th scope="col">주문취소</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="text-center" th:each="post : ${ordersList}">
+            <td scope="row">
+                <span th:text="${post.itemTitle}"></span>
+            </td>
+            <td>
+                <span th:text="${post.status}"></span>
+            </td>
+            <td>
+                <span th:text="${post.createdDate}"></span>
+            </td>
+            <td>
+                <span>
+                    <form th:action="@{'/user/item/cancel/' + ${post.title}}" method="post">
+                        <button type="submit" class="badge bi bi-pencil-square">주문취소</button>
+                    </form>
+                </span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="row">
+        <div class="col-auto mr-auto"></div>
+        <div class="col-auto">
+            <a class="btn btn-secondary" th:href="@{'/user/myPage/' + ${email}}" role="button">이전페이지</a>
+        </div>
+    </div>
+</div>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../css/bootstrap.min.css"></script>
+</body>
+</html>
