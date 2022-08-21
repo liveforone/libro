@@ -51,6 +51,7 @@ public class OrderService {
                 .status(OrderStatus.ORDER)
                 .build();
         itemRepository.minusRemaining(itemTitle);  //상품 재고 -1
+        userRepository.plusCount(member);  //주문 횟수 +1
         orderRepository.save(ordersDto.toEntity());
     }
 
@@ -80,6 +81,7 @@ public class OrderService {
                 .status(OrderStatus.CANCEL)
                 .build();
         itemRepository.plusRemaining(title);  //재고수량 복구(+1)
+        userRepository.minusCount(email);  //주문횟수 -1
         orderRepository.save(ordersDto.toEntity());
     }
 }

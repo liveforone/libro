@@ -24,7 +24,7 @@ import java.security.Principal;
 @Controller
 @RequiredArgsConstructor
 @Slf4j
-public class ItemController {
+public class ItemController {  //판매자 페이지와 함께 다룸.
 
     private final ItemService itemService;
 
@@ -44,6 +44,27 @@ public class ItemController {
         return Math.min(nowPage + 5, itemList.getTotalPages());
     }
     //----------------페이징 위치 함수 종료----------------//
+
+
+    //== 판매자 페이지 ==//
+    @GetMapping("/user/sellerPage/{me}")
+    public String sellerPage(
+            @PageableDefault(page = 0, size = 2, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
+            @PathVariable("me") String me,
+            Model model
+    ) {
+        Page<Item> sellerPage = itemService.getSellerPage(me, pageable);
+        int nowPage = getNowPage(sellerPage);
+        int startPage = getStartPage(nowPage);
+        int endPage = getEndPage(nowPage, sellerPage);
+
+        model.addAttribute("sellerPage", sellerPage);
+        model.addAttribute("nowPage", nowPage);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+        model.addAttribute("me", me);
+        return "/user/sellerPage";
+    }
 
 
     //== 상품 홈 페이지 ==//

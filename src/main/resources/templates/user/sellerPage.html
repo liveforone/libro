@@ -2,22 +2,71 @@
 <html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8" />
-    <title>판매자 등록</title>
+    <title>판매자 페이지</title>
     <link th:href="@{/css/bootstrap.min.css}"
           href="../css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<header th:insert="common/header.html"></header>
-<h1 style="text-align: center;">판매자 등록 하시겠습니까?</h1>
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <a class="navbar-brand" th:href="@{/user/itemHome}">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <h3><span th:text="|판매자 ${me}님의 페이지|" class="badge badge-secondary"></span></h3>
+    </div>
+</nav>
 <div class="container">
-    <form th:action="@{/user/seller}" method="post">
-        <div class="row">
-            <div class="col-auto mr-auto"></div>
-            <div class="col-auto">
-                <input class="btn btn-primary" type="submit" role="button" value="판매자 등록" />
-            </div>
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title" th:text="|판매자 ${me}님 환영합니다!|"></h2>
         </div>
-    </form>
+    </div>
+    <table class="table">
+        <thead class="thead-light">
+        <tr class="text-center">
+            <th scope="col">#</th>
+            <th scope="col">제목</th>
+            <th scope="col">작가</th>
+            <th scope="col">카테고리</th>
+            <th scope="col">발행년도</th>
+            <th scope="col">좋아요</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="text-center" th:each="post : ${sellerPage}">
+            <th scope="row">
+                <span th:text="${post.id}"></span>
+            </th>
+            <td>
+                <a th:href="@{'/user/item/' + ${post.title}}">
+                    <span th:text="${post.title}"></span>
+                </a>
+            </td>
+            <td>
+                <span th:text="${post.author}"></span>
+            </td>
+            <td>
+                <a th:href="@{'/user/item/category/' + ${post.category}}">
+                    <span th:text="${post.category}"></span>
+                </a>
+            </td>
+            <td>
+                <span th:text="${post.year}"></span>
+            </td>
+            <td>
+                <span th:text="${post.good}"></span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="col-auto">
+        <a class="btn btn-secondary" th:href="@{/user/itemHome}" role="button">나가기</a>
+    </div>
+    <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
+        <a th:if="${page != nowPage}" th:href="@{'/user/sellerPage/' + ${me}(page = ${page - 1})}" th:text="${page}"></a>
+        <strong th:if="${page == nowPage}" th:text="${page}" style="color : red"></strong>
+    </th:block>
 </div>
 <script src="../js/bootstrap.min.js"></script>
 <script src="../css/bootstrap.min.css"></script>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <title>판매자 등록</title>
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<header th:insert="common/header.html"></header>
+<h1 style="text-align: center;">판매자 등록 하시겠습니까?</h1>
+<div class="container">
+    <form th:action="@{/user/seller}" method="post">
+        <div class="row">
+            <div class="col-auto mr-auto"></div>
+            <div class="col-auto">
+                <input class="btn btn-primary" type="submit" role="button" value="판매자 등록" />
+            </div>
+        </div>
+    </form>
+</div>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../css/bootstrap.min.css"></script>
+</body>
+</html>

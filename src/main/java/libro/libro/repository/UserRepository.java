@@ -21,8 +21,18 @@ public interface UserRepository extends JpaRepository<Users, Long> {
     @Query("update Users u set u.balance = u.balance + :balance where u.email = :email")
     void updateBalance(@Param("balance") int balance, @Param("email") String email);
 
-    //== 계좌 업데이트 - 주문 완료 후 ==//
+    //== 계좌 업데이트 - 주문 완료 ==//
     @Modifying
     @Query("update Users u set u.balance = u.balance - :price where u.email = :email")
     void changeBalance(@Param("price") int price, @Param("email") String email);
+
+    //== 주문횟수 업데이트 - 주문 완료 ==//
+    @Modifying
+    @Query("update Users u set u.count = u.count + 1 where u.email = :email")
+    void plusCount(@Param("email") String email);
+
+    //== 주문횟수 업데이트 - 주문 취소 ==//
+    @Modifying
+    @Query("update Users u set u.count = u.count - 1 where u.email = :email")
+    void minusCount(@Param("email") String email);
 }

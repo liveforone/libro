@@ -3,6 +3,7 @@ package libro.libro.controller;
 import libro.libro.domain.Orders;
 import libro.libro.domain.Users;
 import libro.libro.dto.OrdersDto;
+import libro.libro.service.ItemService;
 import libro.libro.service.OrderService;
 import libro.libro.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @Slf4j
-public class OrderController {  //주문과 myPage를 함께 다룸(둘이 연관관계가 있음)
+public class OrderController {  //주문과 myPage 를 함께 다룸(둘이 연관관계가 있음)
 
     private final OrderService orderService;
     private final UserService userService;

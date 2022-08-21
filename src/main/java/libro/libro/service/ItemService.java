@@ -26,6 +26,12 @@ public class ItemService {
         return itemRepository.findAll(pageable);
     }
 
+    //== 등록자 기준으로 가져오기 - sellerPage ==//
+    @Transactional(readOnly = true)
+    public Page<Item> getSellerPage(String writer, Pageable pageable) {
+        return itemRepository.findByWriter(writer, pageable);
+    }
+
     //== 상품 검색 ==//
     @Transactional(readOnly = true)
     public Page<Item> getSearchList(String keyword, Pageable pageable) {

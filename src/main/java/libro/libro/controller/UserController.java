@@ -60,7 +60,7 @@ public class UserController {
     //== 판매자 등록 페이지 ==//
     @GetMapping("/user/seller")
     public String sellerPage() {
-        return "/user/sellerPage";
+        return "/user/sellerRegi";
     }
 
     //== 판매자 등록 - 권한 업데이트 ==//
@@ -68,7 +68,7 @@ public class UserController {
     public String seller(Principal principal) {
         String email = principal.getName();
         userService.updateAuth(email);
-        log.info("Seller Update Success!!");
+        log.info("Seller Regi Success!!");
         return "redirect:/";
     }
 

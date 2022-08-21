@@ -44,7 +44,10 @@
         <li class="nav-item">
             <a class="nav-link" th:href="@{/user/item/category/자기계발}">자기계발</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" sec:authorize="isAuthenticated()" th:if="${#authorization.expression('hasRole(''SELLER'')')}">
+            <a class="nav-link" th:href="@{'/user/sellerPage/' + ${me}}">SellerPage</a>
+        </li>
+        <li class="nav-item" sec:authorize="isAuthenticated()" th:if="${not#authorization.expression('hasRole(''SELLER'')')}">
             <a class="nav-link" th:href="@{'/user/myPage/' + ${me}}">MyPage</a>
         </li>
     </ul>

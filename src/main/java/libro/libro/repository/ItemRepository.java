@@ -13,6 +13,9 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     //== 제목으로 검색 + 페이징 ==//
     Page<Item> findByTitleContaining(String keyword, Pageable pageable);
 
+    //== 등록자로 찾기 페이징 ==//
+    Page<Item> findByWriter(String writer, Pageable pageable);
+
     //== 제목으로 게시글 한개 찾기 ==//
     Item findByTitle(String title);
 
