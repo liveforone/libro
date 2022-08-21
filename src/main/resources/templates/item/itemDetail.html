@@ -19,7 +19,8 @@
             <span class="card-text" th:text="|출판년도 : ${item.year}|"></span><br>
             <h4 class="card-text" th:text="|가격 : ${item.price}|"></h4>
             <h4 class="card-text" th:text="|수량 : ${item.remaining}|"></h4><br>
-            <form th:if="${item.remaining != 0}" id="orders-form" th:action="@{'/user/item/orders/' + ${item.title}}" method="post">
+            <form th:if="${item.remaining != 0}" id="orders-form" th:action="@{'/user/item/order/' + ${item.title}}" method="post">
+                <input name="price" type="hidden" th:value="${item.price}">
                 <button id="orders-btn" type="submit" class="btn btn-primary">상품 구매</button>
             </form>
             <button th:if="${item.remaining == 0}" id="zero-btn" type="button" class="btn btn-warning">품절</button>

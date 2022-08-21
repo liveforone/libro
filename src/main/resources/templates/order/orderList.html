@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8" />
     <title>ordersList</title>
@@ -40,7 +40,8 @@
             </td>
             <td>
                 <span>
-                    <form th:action="@{'/user/item/cancel/' + ${post.title}}" method="post">
+                    <form th:action="@{'/user/item/cancel/' + ${post.ItemTitle}}" method="post">
+                        <input name="email" type="hidden" th:value="${email}">
                         <button type="submit" class="badge bi bi-pencil-square">주문취소</button>
                     </form>
                 </span>

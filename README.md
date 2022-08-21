@@ -50,14 +50,12 @@
 /user/myPage/{email}
 /user/myPage/address/{email}
 /user/myPage/deposit/{email}
-/user/myPage/ordersList/{email}
+/user/myPage/orderList/{email}
+/user/item/order/{title}
 
 구매 버튼 -> 
 구매버튼 클릭시 구자산 정보가져와서 가격이랑 비교해야함
-
-
-/user/item/orders/{title}
-/user/item/denial/{title} - 잔액 부족시 구매 거부
+잔액 부족시 구매 거부
 
 /user/item/cancel/{title} - orderList안에서 진행함. 타이틀은 itemTitle임.
 
@@ -101,3 +99,17 @@ signed는 음수까지 포함하는 int형이고, unsigned는 정수만 포함�
 > selected를 걸어서 기본으로 보여지게하고<br>
 th:value로 값을 넣고 동일한 값을 th:text로 넣어주어야 값도 입력되고 시각적으로 보여지기까지 한다.<br>
 th:text를 넣지않고 th:value만 넣으면 값이 보이지 않는다.
+
+## mysql 예약어 order
+* mysql 예약어에는 order가 포함되어있다.
+* order로 테이블(엔티티) 지정시 에러가 뜬다.
+* user와 마찬가지로 orders로 지정하자.
+
+## 주문 취소
+* 주문취소는 LocalDate를 활용해서 주문후 7일 안에 주문취소가 가능하도록 설정했다.
+* LocalDate로 저장된 생성날자에서 getDayOfYear()를 사용해서 365일중 몇일인지(예 : 260) 뽑아낸다.
+* 그리고 그 수에 + 7을 더해준다. 7을 더하는것이 가능한 이유는 getDayOfYear() 값은 int 형이다.
+* 그리고 LocalDate.now().getDayOfYear()로 현재 날짜를 출력하고 그 값이 생성날짜에 7을 더한 값과 비교한다.
+* 주문취소가 가능하다면 1을 리턴하고, 아니라면 -1을 리턴하도록 했다.
+* 컨트롤러단에서 입력받은 int 변수를 통해서 if문으로 1인지 아닌지 판별후 1이면 주문취소를 하고 아닐경우 cant페이지로 리다이렉트 했다.
+* 주문취소는 status를 CANCEL로 바꾸는 것이지, 절대 db에서 삭제가 아님!!

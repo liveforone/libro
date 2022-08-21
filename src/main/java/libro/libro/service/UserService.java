@@ -97,6 +97,6 @@ public class UserService implements UserDetailsService {
     //== 게좌 잔액 업데이트 ==//
     @Transactional
     public void updateBalance(int balance, String email) {
-        userRepository.updateBalance(balance, email);
+        userRepository.updateBalance(balance, email);  //기존 자산에 더함.
     }
 }

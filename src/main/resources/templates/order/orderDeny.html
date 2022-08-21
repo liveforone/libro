@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <title>주문 불가능</title>
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<header th:insert="common/header.html"></header>
+<h1 style="text-align: center;" th:text="|구매자 ${member}님 잔액이부족하여 구매가 거부되셨습니다.|"></h1>
+<h3 style="text-align: center;" th:text="|해당상품 ${title}을 구매하시려면 잔액을 충전해주세요.|"></h3>
+<div class="container row" style="float: none; margin:100 auto;">
+    <div class="col-md-3" style="float: none; margin:0 auto;">
+        <a class="btn btn-secondary" th:href="@{/user/itemHome}" role="button">상품홈으로</a>
+    </div>
+</div>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../css/bootstrap.min.css"></script>
+</body>
+</html>
